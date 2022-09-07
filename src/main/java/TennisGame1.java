@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
     
@@ -5,6 +7,12 @@ public class TennisGame1 implements TennisGame {
     private int m_score2 = 0;
     private String player1Name;
     private String player2Name;
+    private Map<Integer, String> equalScoreMap = new HashMap<Integer, String>(){{
+        put(0,"Love-All");
+        put(1,"Fifteen-All");
+        put(2,"Thirty-All");
+    }};
+
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -23,23 +31,12 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (isSameScore())
+        if (isEqualScore())
         {
-            switch (m_score1)
-            {
-                case 0:
-                        score = "Love-All";
-                    break;
-                case 1:
-                        score = "Fifteen-All";
-                    break;
-                case 2:
-                        score = "Thirty-All";
-                    break;
-                default:
-                        score = "Deuce";
-                    break;
-                
+            score = equalScoreMap.get(m_score1);
+
+            if (score == null){
+                score = "Deuce";
             }
         }
         else if (m_score1>=4 || m_score2>=4)
@@ -76,7 +73,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private boolean isSameScore() {
+    private boolean isEqualScore() {
         return m_score1==m_score2;
     }
 }
