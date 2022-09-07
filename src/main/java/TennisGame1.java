@@ -39,7 +39,7 @@ public class TennisGame1 implements TennisGame {
                 score = "Deuce";
             }
         }
-        else if (m_score1>=4 || m_score2>=4)
+        else if (isScoreOverOrEqualsFour(m_score1) || isScoreOverOrEqualsFour(m_score2))
         {
             int minusResult = m_score1-m_score2;
             if (minusResult==1) score ="Advantage player1";
@@ -71,6 +71,10 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private boolean isScoreOverOrEqualsFour(int score){
+        return score>=4;
     }
 
     private boolean isEqualScore() {
