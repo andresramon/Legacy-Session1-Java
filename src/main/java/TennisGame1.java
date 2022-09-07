@@ -12,16 +12,18 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if (playerName == "player1") {
             m_score1 += 1;
-        else
+        }
+        else {
             m_score2 += 1;
+        }
     }
 
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (m_score1==m_score2)
+        if (isSameScore())
         {
             switch (m_score1)
             {
@@ -72,5 +74,9 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private boolean isSameScore() {
+        return m_score1==m_score2;
     }
 }
