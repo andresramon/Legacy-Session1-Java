@@ -26,7 +26,7 @@ public class TennisGame1 implements TennisGame{
     }
 
     public void wonPoint(String playerName){
-        if(playerName == "player1"){
+        if(playerName.equalsIgnoreCase(PlayerEnum.Player1.name())){
             m_score1 += 1;
         }else {
             m_score2 += 1;
@@ -34,20 +34,25 @@ public class TennisGame1 implements TennisGame{
     }
 
     public String getScore(){
-        String score = "";
-        if(isEqualScore()){
-            score = equalScoreMap.get(m_score1);
 
-            if(score == null){
-                score = "Deuce";
-            }
-        }else if(isScoreOverOrEqualsFour(m_score1) || isScoreOverOrEqualsFour(m_score2)){
-            score = getScoreForAdvantageOrWinnerPlayer();
-        }else {
-            score = getNotEqualOrAdvantageScore();
+        if(isEqualScore()){
+            return getEqualScore();
+        } 
+        	
+        if(isBothScoresOverOrEqualsFour()){
+            return getScoreForAdvantageOrWinnerPlayer();
         }
-        return score;
+        
+        return getNotEqualOrAdvantageScore();
     }
+
+	private boolean isBothScoresOverOrEqualsFour() {
+		return m_score1 >= 4 || m_score2 >= 4;
+	}
+
+	private String getEqualScore() {
+		return equalScoreMap.getOrDefault(m_score1, "Deuce");
+	}
 
     private String getNotEqualOrAdvantageScore(){
 
@@ -70,10 +75,6 @@ public class TennisGame1 implements TennisGame{
         }
 
         return "Win for player2";
-    }
-
-    private boolean isScoreOverOrEqualsFour(int score){
-        return score >= 4;
     }
 
     private boolean isEqualScore(){
