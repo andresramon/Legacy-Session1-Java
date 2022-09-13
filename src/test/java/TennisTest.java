@@ -36,7 +36,7 @@ public class TennisTest {
                 { 0, 2, "Love-Thirty"},
                 { 3, 0, "Forty-Love"},
                 { 0, 3, "Love-Forty"},
-                { 4, 0, "Win for player1"},
+                {4, 0, "Win for player1"},
                 { 0, 4, "Win for player2"},
                 
                 { 2, 1, "Thirty-Fifteen"},
